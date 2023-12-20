@@ -22,17 +22,17 @@ jobs:
       with:
         dotnet-version: 7.0.x # Replace with the specific version you need
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v1
   
-    - name: Terraform Init
-      run: terraform init
+    # - name: Terraform Init
+    #   run: terraform init
 
-    - name: Terraform Plan
-      run: terraform plan
+    # - name: Terraform Plan
+    #   run: terraform plan
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve
 
     - name: Restore and build Blazor app
       run: |
