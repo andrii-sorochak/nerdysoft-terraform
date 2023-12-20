@@ -1,0 +1,38 @@
+name: Terraforming on Auzre
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET 7 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x # Replace with the specific version you need
+
+    - name: Restore and build Blazor app
+      run: |
+        dotnet restore
+        dotnet build
+        dotnet publish -c Release -property:PublishDir='./myapp' 
+
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: my-linux-app
+        slot-name: production
+        publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
+        package: ./myapp
+
+    - name: Clean up
+      run: |
+        cd terraform-directory
+        terraform destroy -auto-approve
