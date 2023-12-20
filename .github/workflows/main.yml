@@ -30,8 +30,3 @@ jobs:
         app-name: nerdysoft-terraform-linux-app
         publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
         package: ./myapp
-
-    - name: Clean up
-      run: |
-        cd terraform-directory
-        terraform destroy -auto-approve

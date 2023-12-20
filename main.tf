@@ -31,6 +31,10 @@ resource "azurerm_linux_web_app" "example" {
   service_plan_id     = azurerm_service_plan.sp.id
 
   site_config {
+    application_stack {
+      dotnet_version = "7.0"
+    }
+
     always_on         = false
   }
 }
